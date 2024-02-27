@@ -39,7 +39,8 @@ jobs:
         run: dotnet restore "WebApplication3/WebApplication3.sln"
 
       - name: Build the app package
-        run: dotnet build "$env:Wap_Project_Path" --configuration "$env:Configuration"
+        run: dotnet build "$env:Wap_Project_Path" --configuration $env:Configuration
+
 
       - name: Generate .nupkg files
         run: dotnet pack "$env:Wap_Project_Path" --configuration "$env:Configuration" --output "$env:Wap_Project_Path/AppPackages"
