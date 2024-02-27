@@ -40,7 +40,7 @@ jobs:
 
       - name: Build the app package
         run: |
-          & "C:\Program Files\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin" "$env:Wap_Project_Path" /p:Configuration="$env:Configuration" /p:UapAppxPackageBuildMode="$env:Appx_Package_Build_Mode" /p:AppxBundle="$env:Appx_Bundle"
+          & "C:\Program Files\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\MSBuild.exe" "$env:Wap_Project_Path" /p:Configuration="$env:Configuration" /p:UapAppxPackageBuildMode="$env:Appx_Package_Build_Mode" /p:AppxBundle="$env:Appx_Bundle"
         shell: pwsh
 
       - name: Remove the pfx
