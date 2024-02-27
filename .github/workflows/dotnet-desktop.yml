@@ -21,6 +21,7 @@ jobs:
       Test_Project_Path: your-test-project-path                 
       Wap_Project_Directory: your-wap-project-directory-name    
       Wap_Project_Path: your-wap-project-path                   
+      DOTNET_ROOT: C:\Program Files\dotnet
 
     steps:
     - name: Checkout
@@ -33,11 +34,10 @@ jobs:
       with:
         dotnet-version: 6.0.x
 
-    - name: Run MSBuild Restore
-      run: |
-        "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\msbuild.exe" WebApplication3.sln /t:Restore /p:Configuration=""
+    - name: Restore Dependencies
+      run: dotnet restore $env:Solution_Name
       env:
-        DOTNET_ROOT: C:\Program Files\dotnet
+        Solution_Name: WebApplication3.sln
 
     - name: Decode the pfx
       run: |
