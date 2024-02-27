@@ -28,24 +28,23 @@ jobs:
       with:
         fetch-depth: 0
 
-    
     - name: Install .NET Core
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
 
-    
-    - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@v1.0.2
-    
+    - name: Download and Install MSBuild
+      run: |
+        Invoke-WebRequest -Uri https://aka.ms/vs/16/release/vs_buildtools.exe -OutFile vs_buildtools.exe
+        .\vs_buildtools.exe --quiet --wait --norestart --nocache --installPath "C:\BuildTools" --add Microsoft.VisualStudio.Workload.MSBuildTools
+        Remove-Item -Path vs_buildtools.exe
+
     - name: Restore the application
       run: msbuild $env:WebApplication3.sln /t:Restore /p:Configuration=$env:Configuration
       env:
-       Solution_Name: WebApplication3.sln
-       Configuration: Debug
-       working-directory: ./WebApplication3
+        Configuration: Debug
+        working-directory: ./WebApplication3
 
-    
     - name: Decode the pfx
       run: |
         $pfx_cert_byte = [System.Convert]::FromBase64String("${{ secrets.Base64_Encoded_Pfx }}")
