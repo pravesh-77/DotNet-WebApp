@@ -35,9 +35,7 @@ jobs:
         dotnet-version: 6.0.x
 
     - name: Restore Dependencies
-      run: dotnet restore $env:Solution_Name
-      env:
-        Solution_Name: WebApplication3.sln
+      run: dotnet restore "${{ env.Wap_Project_Path }}\${{ env.Solution_Name }}"
 
     - name: Decode the pfx
       run: |
@@ -57,7 +55,6 @@ jobs:
     - name: Remove the pfx
       run: Remove-Item -path $env:Wap_Project_Directory\GitHubActionsWorkflow.pfx
 
-    
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
