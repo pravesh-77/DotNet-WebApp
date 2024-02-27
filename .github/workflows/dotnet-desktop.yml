@@ -34,9 +34,10 @@ jobs:
         dotnet-version: 6.0.x
 
     - name: Restore the application
-      run: msbuild $env:WebApplication3.sln /t:Restore /p:Configuration=$env:Configuration
+      run: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin\\msbuild.exe $env:WebApplication3.sln /t:Restore /p:Configuration=$env:Configuration"
       env:
         Configuration: Debug
+        WebApplication3.sln: WebApplication3.sln
         working-directory: ./WebApplication3
 
     - name: Decode the pfx
