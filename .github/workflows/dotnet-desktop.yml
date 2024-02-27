@@ -57,6 +57,6 @@ jobs:
           
       - name: Push package to GitHub Packages
         run: |
-          for /r "WebApplication3/WebApplication3/AppPackages" %%i in (*.nupkg) do (
-            dotnet nuget push "%%i" --source "https://nuget.pkg.github.com/pravesh-77/index.json" --api-key "${{ secrets.DOT_TOKEN }}"
-          )
+          foreach ($file in Get-ChildItem -Path "${{ env.Wap_Project_Path }}/AppPackages" -Recurse -Filter *.nupkg) {
+            dotnet nuget push $file.FullName --source "https://nuget.pkg.github.com/pravesh-77/index.json" --api-key "${{ secrets.DOT_TOKEN }}"
+          }
