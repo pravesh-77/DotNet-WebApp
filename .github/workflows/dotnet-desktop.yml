@@ -7,7 +7,9 @@ on:
     branches: [ "main" ]
 
 jobs:
+
   build:
+
     strategy:
       matrix:
         configuration: [Debug, Release]
@@ -31,10 +33,11 @@ jobs:
       with:
         dotnet-version: 6.0.x
 
-    - name: Run MSBuild
+    - name: Run MSBuild Restore
       run: |
-       "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\msbuild.exe" "${{ env.Solution_Name }}" /t:Restore /p:Configuration="${{ env.Configuration }}"
-      working-directory: ./WebApplication3
+       "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\msbuild.exe" WebApplication3.sln /t:Restore /p:Configuration=""
+      env:
+        DOTNET_ROOT: C:\Program Files\dotnet
 
     - name: Decode the pfx
       run: |
@@ -54,6 +57,7 @@ jobs:
     - name: Remove the pfx
       run: Remove-Item -path $env:Wap_Project_Directory\GitHubActionsWorkflow.pfx
 
+    
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
