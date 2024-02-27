@@ -18,7 +18,7 @@ jobs:
       Solution_Name: WebApplication3.sln
       Test_Project_Path: your-test-project-path
       Wap_Project_Directory: your-wap-project-directory-name
-      Wap_Project_Path: DotNet-WebApp/WebApplication3
+      Wap_Project_Path: WebApplication3/WebApplication3
       DOTNET_ROOT: C:\Program Files\dotnet
       Appx_Bundle: Always
       Appx_Bundle_Platforms: x86|x64
@@ -39,7 +39,7 @@ jobs:
         run: dotnet restore "WebApplication3/WebApplication3.sln"
 
       - name: Build the app package
-        run: dotnet build "$env:Wap_Project_Path\WebApplication3.sln" --configuration "$env:Configuration"
+        run: dotnet build "$env:Wap_Project_Path" --configuration "$env:Configuration"
 
       - name: Remove the pfx
         run: Remove-Item -path $env:Wap_Project_Directory\GitHubActionsWorkflow.pfx
