@@ -56,7 +56,7 @@ jobs:
           dotnet-version: '6.x'
           
       - name: Push package to GitHub Packages
-        run: dotnet nuget push "WebApplication3/WebApplication3/AppPackages/*.nupkg" --source "https://nuget.pkg.github.com/pravesh-77/index.json"
-        env:
-          NUGET_VERSION: '5.x'
-          NUGET_API_KEY: ${{ secrets.DOT_TOKEN }}
+        run: |
+          for /r "WebApplication3/WebApplication3/AppPackages" %%i in (*.nupkg) do (
+            dotnet nuget push "%%i" --source "https://nuget.pkg.github.com/pravesh-77/index.json" --api-key "${{ secrets.DOT_TOKEN }}"
+          )
