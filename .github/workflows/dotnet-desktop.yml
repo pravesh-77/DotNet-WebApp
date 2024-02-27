@@ -41,7 +41,9 @@ jobs:
     - name: Restore the application
       run: msbuild $env:WebApplication3.sln /t:Restore /p:Configuration=$env:Configuration
       env:
-        Configuration: ${{ matrix.configuration }}
+       Solution_Name: WebApplication3.sln
+       Configuration: Debug
+       working-directory: ./WebApplication3
 
     
     - name: Decode the pfx
