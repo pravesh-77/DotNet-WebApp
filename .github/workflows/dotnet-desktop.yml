@@ -22,6 +22,9 @@ jobs:
       Wap_Project_Directory: your-wap-project-directory-name    
       Wap_Project_Path: your-wap-project-path                   
       DOTNET_ROOT: C:\Program Files\dotnet
+      Appx_Bundle: Always
+      Appx_Bundle_Platforms: x86|x64
+      Appx_Package_Build_Mode: StoreUpload
 
     steps:
     - name: Checkout
@@ -37,13 +40,10 @@ jobs:
     - name: Restore Dependencies
       run: dotnet restore "WebApplication3/WebApplication3.sln"
 
-    - name: Create the app package
-      run: msbuild $env:Wap_Project_Path /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle
-      env:
-        Appx_Bundle: Always
-        Appx_Bundle_Platforms: x86|x64
-        Appx_Package_Build_Mode: StoreUpload
-        Configuration: ${{ matrix.configuration }}
+    - name: Build the app package
+      run: |
+        "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" $env:Wap_Project_Path /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle
+      shell: pwsh
 
     - name: Remove the pfx
       run: Remove-Item -path $env:Wap_Project_Directory\GitHubActionsWorkflow.pfx
