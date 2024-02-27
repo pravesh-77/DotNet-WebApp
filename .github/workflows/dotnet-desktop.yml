@@ -35,7 +35,7 @@ jobs:
 
     - name: Run MSBuild Restore
       run: |
-       "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\msbuild.exe" WebApplication3.sln /t:Restore /p:Configuration=""
+        "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\msbuild.exe" WebApplication3.sln /t:Restore /p:Configuration=""
       env:
         DOTNET_ROOT: C:\Program Files\dotnet
 
