@@ -46,7 +46,7 @@ jobs:
        Solution_Name: WebApplication3.sln
        Test_Project_Path: your-test-project-path
        Wap_Project_Directory: your-wap-project-directory-name
-       Wap_Project_Path: your-wap-project-path
+       Wap_Project_Path: DotNet-WebApp/WebApplication3
        DOTNET_ROOT: C:\Program Files\dotnet
        Appx_Bundle: Always
        Appx_Bundle_Platforms: x86|x64
