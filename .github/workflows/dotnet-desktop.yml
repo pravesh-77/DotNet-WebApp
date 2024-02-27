@@ -50,7 +50,6 @@ jobs:
         with:
           name: MSIX Package
           path: ${{ env.Wap_Project_Path }}/AppPackages
-          timeout-minutes: 5
 
       - name: Publish to GitHub Packages
         uses: actions/setup-dotnet@v1
