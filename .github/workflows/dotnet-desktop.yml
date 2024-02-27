@@ -35,9 +35,7 @@ jobs:
         dotnet-version: 6.0.x
 
     - name: Restore Dependencies
-      run: dotnet restore "DotNet-WebApp/WebApplication3/WebApplication3.sln"
-
-
+      run: dotnet restore "WebApplication3/WebApplication3.sln"
 
     - name: Decode the pfx
       run: |
