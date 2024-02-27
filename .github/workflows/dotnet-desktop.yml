@@ -46,3 +46,12 @@ jobs:
         with:
           name: MSIX Package
           path: ${{ env.Wap_Project_Path }}/AppPackages
+
+      - name: Publish to GitHub Packages
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.x'
+      - run: dotnet nuget push "WebApplication3/WebApplication3/AppPackages/YourPackage.nupkg" --source "github"
+        env:
+          NUGET_VERSION: '5.x'
+          NUGET_API_KEY: ${{ secrets.DOT_TOKEN }}
