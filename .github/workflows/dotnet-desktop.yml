@@ -33,13 +33,6 @@ jobs:
       with:
         dotnet-version: 6.0.x
 
-    - name: Install Visual Studio Build Tools
-      run: |
-       Invoke-WebRequest -Uri https://aka.ms/vs/16/release/vs_buildtools.exe -OutFile vs_buildtools.exe
-       .\vs_buildtools.exe --quiet --wait --norestart --nocache --installPath "C:\BuildTools" --add Microsoft.VisualStudio.Workload.MSBuildTools
-       Remove-Item -Path vs_buildtools.exe -Force -ErrorAction SilentlyContinue
-
-
     - name: Restore the application
       run: msbuild $env:WebApplication3.sln /t:Restore /p:Configuration=$env:Configuration
       env:
@@ -51,7 +44,6 @@ jobs:
         $pfx_cert_byte = [System.Convert]::FromBase64String("${{ secrets.Base64_Encoded_Pfx }}")
         $certificatePath = Join-Path -Path $env:Wap_Project_Directory -ChildPath GitHubActionsWorkflow.pfx
         [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
-
     
     - name: Create the app package
       run: msbuild $env:Wap_Project_Path /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:PackageCertificatePassword=${{ secrets.Pfx_Key }}
