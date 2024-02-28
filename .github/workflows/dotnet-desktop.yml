@@ -71,11 +71,11 @@ jobs:
       - name: Publish the Project
         run: dotnet publish "$env:Wap_Project_Path" --configuration Debug --output "$env:Wap_Project_Path/PublishedApp"
 
-      - name: Deploy to IIS Manager
-        uses: microsoft/iis-web-app-management@0.1
-        with:
-          action: 'add-site'
-          name: 'MyDotNetApp'
-          physicalPath: '${{ env.Wap_Project_Path }}/PublishedApp'
-          port: '80'
-          dotNetFrameworkVersion: 'v4.0'
+     # - name: Deploy to IIS Manager
+      #  uses: microsoft/iis-web-app-management@0.1
+       # with:
+        #  action: 'add-site'
+         # name: 'MyDotNetApp'
+          #physicalPath: '${{ env.Wap_Project_Path }}/PublishedApp'
+          #port: '80'
+          #dotNetFrameworkVersion: 'v4.0'
