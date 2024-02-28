@@ -22,7 +22,7 @@ jobs:
         id: download-artifact
         uses: dawidd6/action-download-artifact@v2
         with:
-          repo: "{https://github.com/pravesh-77/DotNet-WebApp}"
-          workflow: "{dotnet-desktop.yml}"
+          repo: https://github.com/pravesh-77/DotNet-WebApp
+          workflow: dotnet-desktop.yml
           path: C:\Users\Admin\Projects\runner\actions-runner\_work\DotNet-WebApp\DotNet-WebApp\WebApplication3\WebApplication3
           search_artifacts: true
