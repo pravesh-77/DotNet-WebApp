@@ -1,10 +1,6 @@
 name: .NET Core Project for Web
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+on: workflow_dispatch
 
 jobs:
   build:
@@ -64,12 +60,12 @@ jobs:
       #- name: Publish the Project
       #  run: dotnet publish "$env:Wap_Project_Path" --configuration Debug --output "$env:Wap_Project_Path/PublishedApp"
 
-      - name: Download artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: WebApplication3.1.0.0.nupkg
+      #- name: Download artifacts
+       # uses: actions/download-artifact@v3
+        #with:
+        #  name: WebApplication3.1.0.0.nupkg
           #path: ${{ env.Wap_Project_Path }}/AppPackages 
-          path: C:\Users\Admin\Projects\runner\actions-runner\_work\DotNet-WebApp\DotNet-WebApp\WebApplication3\WebApplication3
+         # path: C:\Users\Admin\Projects\runner\actions-runner\_work\DotNet-WebApp\DotNet-WebApp\WebApplication3\WebApplication3
 
      # - name: Deploy to IIS Manager
       #  uses: microsoft/iis-web-app-management@0.1
