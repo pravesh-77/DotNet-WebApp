@@ -20,7 +20,7 @@ jobs:
 
       - name: Download artifact
         id: download-artifact
-        uses: dawidd6/action-download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           repo: https://github.com/pravesh-77/DotNet-WebApp
           workflow: dotnet-desktop.yml
