@@ -67,7 +67,7 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v3
         with:
-          name: WebApplication3
+          name: WebApplication3.1.0.0.nupkg
           path: ${{ env.Wap_Project_Path }}/AppPackages
           #path: C:\Users\Admin\Projects\runner\actions-runner\_work\DotNet-WebApp\DotNet-WebApp\WebApplication3\WebApplication3\AppPackages
 
