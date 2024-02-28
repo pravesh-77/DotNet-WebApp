@@ -14,6 +14,6 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v3
         with:
-          name: MSIX Package
+          name: WebApplication3.1.0.0.nupkg
           path: C:\Users\Admin\Projects\runner\actions-runner\_work\DotNet-WebApp\DotNet-WebApp\WebApplication3\WebApplication3
 
