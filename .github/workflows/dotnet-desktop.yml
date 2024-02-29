@@ -64,3 +64,6 @@ jobs:
         with:
           name: WebApplication3.1.0.0.nupkg
           path: ${{ github.workspace }}/WebApplication3/WebApplication3/AppPackages
+
+      - name: Run Ansible playbook for deployment to IIS
+        run: Ansible_deploy_to_IIS.yml
