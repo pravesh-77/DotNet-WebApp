@@ -1,6 +1,6 @@
 name: .NET Core Project for Web
 
-on: workflow_dispatch
+on: push
 
 jobs:
   build:
