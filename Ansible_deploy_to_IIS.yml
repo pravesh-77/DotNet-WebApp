@@ -1,0 +1,33 @@
+---
+- name: .NET Core Build and Deploy
+  hosts: localhost
+  gather_facts: no
+  vars:
+    app_name: WebApplication3
+    artifact_name: WebApplication3.1.0.0.nupkg
+    artifact_path: "/c/Users/Admin/Projects/runner/actions-runner/_work/DotNet-WebApp/DotNet-WebApp/WebApplication3/WebApplication3/AppPackages/WebApplication3.sln/WebApplication3"
+    iis_site_name: "MyDotNetApp"
+    iis_physical_path: "C:\\Users\\Admin\\Projects\\runner\\actions-runner\\_work\\DotNet-WebApp\\DotNet-WebApp\\WebApplication3\\WebApplication3"
+
+  tasks:
+    - name: Download artifact
+      get_url:
+        url: "https://github.com/pravesh-77?tab=packages/{{ WebApplication3 }}"
+        dest: "C:\Users\Admin\Projects\runner\actions-runner\_work\DotNet-WebApp\DotNet-WebApp\WebApplication3\WebApplication3\destination path"
+        validate_certs: no
+
+    - name: Create directory for application
+      win_file:
+        path: "{{ iis_physical_path }}"
+        state: directory
+
+    - name: Unpack NuGet package
+      win_command: "nuget install /c/Users/Admin/Projects/runner/actions-runner/_work/DotNet-WebApp/DotNet-WebApp/WebApplication3/WebApplication3/AppPackages/WebApplication3.sln/WebApplication3 -OutputDirectory C:\\Users\\Admin\\Projects\\runner\\actions-runner\\_work\\DotNet-WebApp\\DotNet-WebApp\\WebApplication3\\WebApplication3"
+
+    - name: Register IIS site
+      win_iis_website:
+        name: "{{ MyDotNetAp }}"
+        state: started
+        physical_path: "C:\\Users\\Admin\\Projects\\runner\\actions-runner\\_work\\DotNet-WebApp\\DotNet-WebApp\\WebApplication3\\WebApplication3"
+        port: 8080
+        host_header: "{{ ansible_host }}"
