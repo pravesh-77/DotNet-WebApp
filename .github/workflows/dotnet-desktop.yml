@@ -1,14 +1,16 @@
-name: .NET Core Project for Web
+name: .NET Core Build and Deploy
 
-on: push
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  build:
+  job1:
+    runs-on: self-hosted
     strategy:
       matrix:
         configuration: [Release]
-
-    runs-on: self-hosted
 
     env:
       Solution_Name: WebApplication3.sln
@@ -26,20 +28,14 @@ jobs:
         with:
           fetch-depth: 0
 
-     # - name: Install .NET Core
-     #   uses: actions/setup-dotnet@v3
-     #   with:
-     #     dotnet-version: 6.0.x
-
       - name: Restore Dependencies
-        run: dotnet restore "WebApplication3/WebApplication3.sln"
+        run: dotnet restore ${{ env.Solution_Name }}
 
       - name: Build the app package
-        run: dotnet build "$env:Wap_Project_Path" --configuration Debug 
-
+        run: dotnet build ${{ env.Wap_Project_Path }} --configuration Debug
 
       - name: Generate .nupkg files
-        run: dotnet pack "$env:Wap_Project_Path" --configuration Debug --output "$env:Wap_Project_Path/AppPackages"
+        run: dotnet pack ${{ env.Wap_Project_Path }} --configuration Debug --output ${{ env.Wap_Project_Path }}/AppPackages
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
@@ -57,21 +53,14 @@ jobs:
           foreach ($file in Get-ChildItem -Path "${{ env.Wap_Project_Path }}/AppPackages" -Recurse -Filter *.nupkg) {
             dotnet nuget push $file.FullName --source "https://nuget.pkg.github.com/pravesh-77/index.json" --api-key "${{ secrets.DOT_TOKEN }}"
           }
-      #- name: Publish the Project
-       # run: dotnet publish "$env:Wap_Project_Path" --configuration Debug --output "$env:Wap_Project_Path/PublishedApp"
 
-      #- name: Download artifacts
-       # uses: actions/download-artifact@v3
-        #with:
-        #  name: WebApplication3.1.0.0.nupkg
-          #path: ${{ env.Wap_Project_Path }}/AppPackages 
-         # path: C:\Users\Admin\Projects\runner\actions-runner\_work\DotNet-WebApp\DotNet-WebApp\WebApplication3\WebApplication3
-
-     # - name: Deploy to IIS Manager
-      #  uses: microsoft/iis-web-app-management@0.1
-       # with:
-        #  action: 'add-site'
-         # name: 'MyDotNetApp'
-          #physicalPath: '${{ env.Wap_Project_Path }}/PublishedApp'
-          #port: '80'
-          #dotNetFrameworkVersion: 'v4.0'
+  job2:
+    runs-on: self-hosted
+    needs: job1
+    steps:
+      - name: Download artifact
+        id: download-artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: WebApplication3.1.0.0.nupkg
+          path: ${{ github.workspace }}/WebApplication3/WebApplication3/AppPackages
