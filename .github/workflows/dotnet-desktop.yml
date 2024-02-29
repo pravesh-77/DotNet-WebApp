@@ -28,8 +28,13 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Debug - List directory contents
+        run: |
+         dir WebApplication3\WebApplication3
       - name: Restore Dependencies
-        run: dotnet restore ${{ env.Solution_Name }}
+        run: dotnet restore WebApplication3.sln
+        working-directory: WebApplication3/WebApplication3
+
 
       - name: Build the app package
         run: dotnet build ${{ env.Wap_Project_Path }} --configuration Debug
