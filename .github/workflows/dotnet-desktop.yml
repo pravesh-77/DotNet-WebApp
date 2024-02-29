@@ -66,4 +66,4 @@ jobs:
           path: ${{ github.workspace }}/WebApplication3/WebApplication3/AppPackages
 
       - name: Run Ansible playbook for deployment to IIS
-        run: Ansible_deploy_to_IIS.yml
+        run: ansible-playbook deploy.yml
