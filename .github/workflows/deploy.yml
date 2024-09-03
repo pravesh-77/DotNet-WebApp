@@ -12,7 +12,7 @@ jobs:
 
     steps:
      # - name: Download artifacts
-      #  uses: actions/download-artifact@v3
+      #  uses: actions/download-artifact@v4.1.7
        # with:
         #  name: WebApplication3.1.0.0.nupkg
           #path: ${{ env.Wap_Project_Path }}/AppPackages 
@@ -20,7 +20,7 @@ jobs:
 
       - name: Download artifact
         id: download-artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4.1.7
         with:
           repo: https://github.com/pravesh-77/DotNet-WebApp
           workflow: dotnet-desktop.yml
