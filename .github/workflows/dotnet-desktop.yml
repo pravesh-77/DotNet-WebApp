@@ -60,7 +60,7 @@ jobs:
     steps:
       - name: Download artifact
         id: download-artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4.1.7
         with:
           name: WebApplication3.1.0.0.nupkg
           path: ${{ github.workspace }}/WebApplication3/WebApplication3/AppPackages
